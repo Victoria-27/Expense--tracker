@@ -1,18 +1,10 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { Component } from '@angular/core';
+import { ExpenseTrackerComponent } from './expense-tracker/expense-tracker.component';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ExpenseTrackerComponent],
+  template: '<app-expense-tracker></app-expense-tracker>'
 })
-export class AppModule { }
+export class AppComponent {}
