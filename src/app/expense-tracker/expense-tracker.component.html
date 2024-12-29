@@ -57,7 +57,7 @@
     <!-- Add Transaction Form -->
     <div>
         <h2 class="text-lg font-semibold mb-3">Add new transaction</h2>
-        <form (ngSubmit)="addTransaction()" class="space-y-4" #form="ngForm">
+        <form (ngSubmit)="addTransaction(form)" class="space-y-4" #form="ngForm">
             <div>
                 <label class="block mb-1">Text</label>
                 <input type="text" [(ngModel)]="newTransactionText" name="text" required minlength="3" #text="ngModel"

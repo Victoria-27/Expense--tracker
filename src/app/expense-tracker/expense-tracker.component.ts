@@ -1,6 +1,6 @@
 import { Component, computed, signal, effect, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Transaction, CATEGORIES } from '../expense.model';
 import { StorageService } from '../storage.service';
 
@@ -62,7 +62,7 @@ export class ExpenseTrackerComponent implements OnInit {
     this.selectedCategory = this.categoryOptions[0];
   }
 
-  addTransaction() {
+  addTransaction(form: NgForm) {
     if (this.newTransactionAmount <= 0) return;
 
     const newTransaction: Transaction = {
@@ -79,11 +79,17 @@ export class ExpenseTrackerComponent implements OnInit {
       newTransaction,
     ]);
 
-    // Reset form
-    this.newTransactionText = '';
-    this.newTransactionAmount = 0;
-    this.transactionType = 'income';
-    this.updateCategoryOptions();
+   // Save to storage
+   this.storageService.saveTransactions(this.transactions());
+
+   // Reset form
+   form.resetForm({
+     text: '',
+     amount: 0,
+     type: 'income',
+     category: this.categoryOptions[0],
+   });
+   this.updateCategoryOptions();
   }
 
   deleteTransaction(id: string) {
