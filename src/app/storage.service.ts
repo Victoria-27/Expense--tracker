@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class StorageService {
   private readonly STORAGE_KEY = 'transactions';
   private transactionsSubject = new BehaviorSubject<Transaction[]>([]);
-
+  transactions$ = this.transactionsSubject.asObservable();
 
   constructor() {
     const storedTransactions = this.loadFromStorage();
